@@ -7,7 +7,7 @@ import Product from './pages/Product';
 const Routes = () => (
     <Switch>
         <Route exact path='/' component={Search} />
-        <Route exact path='/Product/:id' component={Product} />
+        <Route exact path='/product/:id' component={Product} />
         <Route component={
             () => (
                 <div>Page not found</div>
