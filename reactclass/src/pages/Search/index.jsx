@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Search extends Component {
@@ -22,6 +23,9 @@ class Search extends Component {
             .then((data) => {
 
                 console.log(data);
+
+                //<Link to={`/product/${data.id}`} />
+                <Link to={`/product/MLB1165400089`} />
             });
     }
 
