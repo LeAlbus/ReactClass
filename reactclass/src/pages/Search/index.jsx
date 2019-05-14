@@ -25,7 +25,7 @@ class Search extends Component {
                 console.log(data);
 
                 //<Link to={`/product/${data.id}`} />
-                <Link to={`/product/MLB1165400089`} />
+                //<Link to={`/product/MLB1165400089`} />
             });
     }
 
