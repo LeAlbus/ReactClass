@@ -1,9 +1,45 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Search extends Component {
+
+    constructor() {
+        super();
+
+        this.onSearch = this.onSearch.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+
+        this.state = {
+            searchName: '',
+        }
+    }
+
+    onSearch(event) {
+        const searchedValue = this.state.searchName
+        console.log(searchedValue);
+
+        axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
+            .then((data) => {
+
+                console.log(data);
+            });
+    }
+
+    onEdit(event) {
+
+        this.setState({
+            searchName: event.currentTarget.value
+        });
+    }
+
     render() {
         return (
-            <div>Search</div>
+            <div>
+                <input type="text" onChange={this.onEdit} />
+                <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={this.onSearch}>
+                    BUSCAR
+                </button>
+            </div>
         );
     }
 }

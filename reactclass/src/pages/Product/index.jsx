@@ -15,14 +15,23 @@ class Product extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://api.mercadolibre.com/items/${this.state.id}`)
-            .then(({ data }) => {
+        axios.all([
+            axios.get(`https://api.mercadolibre.com/items/${this.state.id}`),
+            axios.get(`https://api.mercadolibre.com/items/${this.state.id}/description`)
+        ])
+            .then(([item, description]) => {
                 //console.log(data);
-
+                console.log(description)
                 this.setState({
-                    data,
+                    data: {
+                        ...item.data,
+                        description: description.data.plain_text,
+                    },
                     isLoading: false
                 });
+            })
+            .catch((err) => {
+                console.log(err)
             });
     }
     /*
@@ -33,7 +42,7 @@ class Product extends Component {
     renderContent() {
         const dataInfo = this.state.data;
         //const {data} = this.state; //it gets the data from state and creates a variable with its value
-
+        console.log(dataInfo.description)
         return (
             <Fragment>
                 <div className="mdl-grid">
@@ -45,13 +54,15 @@ class Product extends Component {
                         <h2> {dataInfo.title} </h2>
                         <h4> Price: R$ {dataInfo.base_price},00 </h4>
                         <h4> Quantity: {dataInfo.available_quantity} </h4>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                             COMPRAR
                         </button>
                     </div>
-
-
+                    <p>
+                        {dataInfo.description}
+                    </p>
                 </div>
+
             </Fragment>
         );
     }
