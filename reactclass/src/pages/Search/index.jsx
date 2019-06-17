@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ResultList from './resultList'
 
 class Search extends Component {
 
@@ -12,11 +11,14 @@ class Search extends Component {
 
         this.state = {
             searchName: '',
-            listRetrieved: []
+            listRetrieved: [],
+            isLoadingList: false
         }
     }
 
     onSearch(event) {
+
+        this.setState({ isLoadingList: true });
 
         axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
             .then((data) => {
@@ -61,9 +63,6 @@ class Search extends Component {
                         {this.state.listRetrieved[i].title}
                     </span>
                 </li>
-
-
-
 
             )
         }
