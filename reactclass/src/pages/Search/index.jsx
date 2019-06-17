@@ -17,7 +17,7 @@ class Search extends Component {
 
     onSearch(event) {
         const searchedValue = this.state.searchName
-        console.log(searchedValue);
+        console.log(this.state.searchName);
 
         axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
             .then((data) => {
@@ -30,6 +30,7 @@ class Search extends Component {
     }
 
     onEdit(event) {
+        console.log("sss");
 
         this.setState({
             searchName: event.currentTarget.value
@@ -39,8 +40,19 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <input type="text" onChange={this.onEdit} />
-                <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={this.onSearch}>
+                <form>
+                    <div className="mdl-textfield mdl-js-textfield">
+                        <input className="mdl-textfield__input"
+                            type="text"
+                            id="searchName"
+                            onChange={this.onEdit} />
+                        <label className="mdl-textfield__label" htmlFor="searchName">
+                            Buscar...
+                        </label>
+                    </div>
+                </form>
+                <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    onClick={this.onSearch}>
                     BUSCAR
                 </button>
             </div>
