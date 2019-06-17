@@ -20,7 +20,7 @@ class Search extends Component {
         axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
             .then((data) => {
                 console.log("DATA:")
-                console.log(data.data.results[0].id);
+                console.log(data.data.results);
 
                 this.props.history.push(`/product/${data.data.results[0].id}`)
             });

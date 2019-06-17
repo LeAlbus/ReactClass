@@ -11,7 +11,6 @@ class Product extends Component {
             isLoading: true,
             data: {},
         }
-        //console.log(props.match.params.id);
     }
 
     componentDidMount() {
@@ -20,8 +19,6 @@ class Product extends Component {
             axios.get(`https://api.mercadolibre.com/items/${this.state.id}/description`)
         ])
             .then(([item, description]) => {
-                //console.log(data);
-                console.log(description)
                 this.setState({
                     data: {
                         ...item.data,
@@ -34,36 +31,29 @@ class Product extends Component {
                 console.log(err)
             });
     }
-    /*
-        then((data) => {
-            console.log(data);
-        });*/
 
     renderContent() {
         const dataInfo = this.state.data;
-        //const {data} = this.state; //it gets the data from state and creates a variable with its value
-        console.log("wwww")
-        console.log(Window)
-        // const dimensions = Dimensions.get('window');
-        // const imageWidth = dimensions.width;
 
         return (
-            <div className="mdl-grid">
+            <div className="mdl-grid" style={{ backgroundColor: "#99999930" }}>
                 <div className="mdl-cell mdl-cell--6-col">
                     <img src={dataInfo.pictures[0].url} width="100%" />
                 </div>
 
                 <div className="mdl-cell mdl-cell--6-col">
-                    <h2> {dataInfo.title} </h2>
-                    <h4 style={{ backgroundColor: "#959595" }}> Preço: R$ {dataInfo.base_price},00 </h4>
-                    <h4 style={{ backgroundColor: "#959595" }}> Disponíveis: {dataInfo.available_quantity} </h4>
+                    <h3> {dataInfo.title} </h3>
+                    <h4> R$ {dataInfo.base_price},00 </h4>
+                    <h6 style={{ backgroundColor: "#FFFFFF" }}>
+                        Quantidade: {dataInfo.available_quantity}
+                    </h6>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                         COMPRAR
                         </button>
                 </div>
                 <p>
                     <h5>
-                        Descrição:
+                        Descrição
                     </h5>
                     {dataInfo.description}
                 </p>
@@ -73,17 +63,9 @@ class Product extends Component {
     }
 
     render() {
-        //console.log(this.state)
+
         const { isLoading } = this.state;
         return isLoading ? <div>Carregando...</div> : this.renderContent()
-        // <Fragment>
-        //     <div> Product </div>
-        //     <div> {dataInfo.title} </div>
-        //     <div> Quantity: {dataInfo.available_quantity} </div>
-        //     <div> Price: {dataInfo.base_price} </div>
-        //     <div> Product ID: {dataInfo.id} </div>
-        // </Fragment>
-
     }
 }
 
