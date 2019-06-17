@@ -55,7 +55,7 @@ class Search extends Component {
                         style={{
                             color: "#999999",
                             backgroundColor: "#999999",
-                            height: 1
+                            height: 10
                         }}
                     />
                     <span className="mdl-list__item-primary-content" >

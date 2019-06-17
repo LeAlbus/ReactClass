@@ -34,7 +34,7 @@ class Product extends Component {
 
     renderContent() {
         const dataInfo = this.state.data;
-
+        let priceUnformated = parseFloat(dataInfo.replace(",", "."));
         return (
             <div className="mdl-grid" style={{ backgroundColor: "#99999930" }}>
                 <div className="mdl-cell mdl-cell--6-col">
@@ -43,7 +43,7 @@ class Product extends Component {
 
                 <div className="mdl-cell mdl-cell--6-col">
                     <h3> {dataInfo.title} </h3>
-                    <h4> R$ {dataInfo.base_price},00 </h4>
+                    <h4> R$ {priceUnformated} </h4>
                     <h6 style={{ backgroundColor: "#FFFFFF" }}>
                         Quantidade: {dataInfo.available_quantity}
                     </h6>
