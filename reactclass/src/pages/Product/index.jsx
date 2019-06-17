@@ -51,10 +51,11 @@ class Product extends Component {
                         COMPRAR
                         </button>
                 </div>
-                <p>
-                    <h5>
-                        Descrição
-                    </h5>
+
+                <h5>
+                    Descrição
+                </h5>
+                <p style={{ marginLeft: "5%" }}>
                     {dataInfo.description}
                 </p>
             </div >

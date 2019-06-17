@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-//import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import ResultList from './resultList'
 
 class Search extends Component {
 
@@ -12,6 +12,7 @@ class Search extends Component {
 
         this.state = {
             searchName: '',
+            listRetrieved: []
         }
     }
 
@@ -19,10 +20,11 @@ class Search extends Component {
 
         axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
             .then((data) => {
-                console.log("DATA:")
-                console.log(data.data.results);
 
-                this.props.history.push(`/product/${data.data.results[0].id}`)
+                this.setState({
+                    listRetrieved: data.data.results
+                })
+                this.forceUpdate()
             });
     }
 
@@ -31,6 +33,42 @@ class Search extends Component {
         this.setState({
             searchName: event.currentTarget.value
         });
+    }
+
+    goToItem(itemID) {
+        console.log(itemID)
+        this.props.history.push(`/product/${itemID}`)
+
+    }
+
+    listResults() {
+        let resultItems = [];
+        for (let i = 0; i < (this.state.listRetrieved.length) - 1; i++) {
+            resultItems.push(
+
+                <li className="mdl-list__item"
+                    key={this.state.listRetrieved[i].id}
+                    onClick={() => this.goToItem(this.state.listRetrieved[i].id)}>
+                    <hr
+                        style={{
+                            color: "#999999",
+                            backgroundColor: "#999999",
+                            height: 1
+                        }}
+                    />
+                    <span className="mdl-list__item-primary-content" >
+                        <img src={this.state.listRetrieved[i].thumbnail} />
+                        {this.state.listRetrieved[i].title}
+                    </span>
+                </li>
+
+
+
+
+            )
+        }
+
+        return resultItems
     }
 
     render() {
@@ -52,7 +90,11 @@ class Search extends Component {
                     onClick={this.onSearch}>
                     BUSCAR
                 </button>
+                <div>
+                    {this.listResults()}
+                </div>
             </div>
+
         );
     }
 }
