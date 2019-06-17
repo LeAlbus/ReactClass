@@ -42,28 +42,33 @@ class Product extends Component {
     renderContent() {
         const dataInfo = this.state.data;
         //const {data} = this.state; //it gets the data from state and creates a variable with its value
-        console.log(dataInfo.description)
-        return (
-            <Fragment>
-                <div className="mdl-grid">
-                    <div className="mdl-cell mdl-cell--6-col">
-                        <img src={dataInfo.pictures[0].url} />
-                    </div>
+        console.log("wwww")
+        console.log(Window)
+        // const dimensions = Dimensions.get('window');
+        // const imageWidth = dimensions.width;
 
-                    <div className="mdl-cell mdl-cell--6-col">
-                        <h2> {dataInfo.title} </h2>
-                        <h4> Price: R$ {dataInfo.base_price},00 </h4>
-                        <h4> Quantity: {dataInfo.available_quantity} </h4>
-                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                            COMPRAR
-                        </button>
-                    </div>
-                    <p>
-                        {dataInfo.description}
-                    </p>
+        return (
+            <div className="mdl-grid">
+                <div className="mdl-cell mdl-cell--6-col">
+                    <img src={dataInfo.pictures[0].url} width="100%" />
                 </div>
 
-            </Fragment>
+                <div className="mdl-cell mdl-cell--6-col">
+                    <h2> {dataInfo.title} </h2>
+                    <h4 style={{ backgroundColor: "#959595" }}> Preço: R$ {dataInfo.base_price},00 </h4>
+                    <h4 style={{ backgroundColor: "#959595" }}> Disponíveis: {dataInfo.available_quantity} </h4>
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                        COMPRAR
+                        </button>
+                </div>
+                <p>
+                    <h5>
+                        Descrição:
+                    </h5>
+                    {dataInfo.description}
+                </p>
+            </div >
+
         );
     }
 

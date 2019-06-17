@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class Search extends Component {
@@ -16,21 +16,17 @@ class Search extends Component {
     }
 
     onSearch(event) {
-        const searchedValue = this.state.searchName
-        console.log(this.state.searchName);
 
         axios.get(`https://api.mercadolibre.com/sites/MLB/search?q=${this.state.searchName}`)
             .then((data) => {
+                console.log("DATA:")
+                console.log(data.data.results[0].id);
 
-                console.log(data);
-
-                //<Link to={`/product/${data.id}`} />
-                //<Link to={`/product/MLB1165400089`} />
+                this.props.history.push(`/product/${data.data.results[0].id}`)
             });
     }
 
     onEdit(event) {
-        console.log("sss");
 
         this.setState({
             searchName: event.currentTarget.value
@@ -38,6 +34,7 @@ class Search extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <form>
