@@ -6,6 +6,7 @@ import Product from './pages/Product';
 
 const Routes = () => (
     <Switch>
+        <Route exact path='/ReactClass/' component={Search} />
         <Route exact path='/' component={Search} />
         <Route exact path='/product/:id' component={Product} />
         <Route component={
